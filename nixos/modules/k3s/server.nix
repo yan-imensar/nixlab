@@ -8,11 +8,4 @@
   networking.firewall.allowedUDPPorts = [
     8472 # k3s : Flannel
   ];
-  services.k3s.enable = true;
-  services.k3s.role = "server";
-  services.k3s.extraFlags = toString [
-	    "--disable servicelb"
-	    "--disable traefik"
-	    "--disable local-storage"
-  ];
 }

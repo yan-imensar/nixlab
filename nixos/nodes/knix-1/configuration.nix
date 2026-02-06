@@ -6,11 +6,11 @@
     ../../modules/k3s/server.nix
   ];
 
-  networking.hostName = "knix-0";
+  networking.hostName = "knix-1";
   networking = {
     interfaces = {
       ens18.ipv4.addresses = [{
-        address = "192.168.1.100";
+        address = "192.168.1.101";
         prefixLength = 24;
       }];
     };
@@ -26,12 +26,12 @@
     enable = true;
     role = "server";
     token = "homelab-k3s-cluster-secret";
-    clusterInit = true;
+    serverAddr = "https://192.168.1.100:6443";
     extraFlags = toString [
       "--disable servicelb"
       "--disable traefik"
       "--disable local-storage"
-      "--node-ip 192.168.1.100"
+      "--node-ip 192.168.1.101"
     ];
   };
 

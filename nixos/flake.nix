@@ -9,6 +9,8 @@
       # nix run github:nix-community/nixos-anywhere -- --generate-hardware-config nixos-generate-config ./hardware-configuration.nix --flake .#generic --target-host user@ip 
 
       # nixos-rebuild switch --flake .#knix-0 --target-host root@192.168.1.100
+      # nixos-rebuild switch --flake .#knix-1 --target-host root@192.168.1.101
+      # nixos-rebuild switch --flake .#knix-2 --target-host root@192.168.1.102
       nixosConfigurations = {
         knix-0 = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -16,6 +18,22 @@
             disko.nixosModules.disko
             ./nodes/knix-0/configuration.nix
             ./nodes/knix-0/hardware-configuration.nix
+          ];
+        };
+        knix-1 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            ./nodes/knix-1/configuration.nix
+            ./nodes/knix-1/hardware-configuration.nix
+          ];
+        };
+        knix-2 = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            ./nodes/knix-2/configuration.nix
+            ./nodes/knix-2/hardware-configuration.nix
           ];
         };
     };
