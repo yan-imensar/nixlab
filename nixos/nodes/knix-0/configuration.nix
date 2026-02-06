@@ -4,6 +4,7 @@
     ./disk-config.nix
     ../../modules/common/apps.nix
     ../../modules/k3s/server.nix
+    ../../modules/storage/longhorn.nix
   ];
 
   networking.hostName = "knix-0";
@@ -26,7 +27,7 @@
     enable = true;
     role = "server";
     token = "homelab-k3s-cluster-secret";
-    clusterInit = true;
+    serverAddr = "https://192.168.1.101:6443";
     extraFlags = toString [
       "--disable servicelb"
       "--disable traefik"
