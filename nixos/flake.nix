@@ -38,14 +38,6 @@
             ./nodes/knix-1/hardware-configuration.nix
           ];
         };
-        knix-2 = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            disko.nixosModules.disko
-            ./nodes/knix-2/configuration.nix
-            ./nodes/knix-2/hardware-configuration.nix
-          ];
-        };
     };
   };
 }
