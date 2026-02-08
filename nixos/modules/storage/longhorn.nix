@@ -10,7 +10,7 @@
     BindPaths = "/run/current-system/sw/bin:/bin";
   };
 
-  boot.kernelModules = [ "iscsi_tcp" ];
+  boot.kernelModules = [ "iscsi_tcp" "dm_crypt" ];
 
   environment.systemPackages = with pkgs; [
     nfs-utils
