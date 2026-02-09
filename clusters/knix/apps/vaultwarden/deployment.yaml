@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden 
+  labels:
+    app: vaultwarden 
+  namespace: vaultwarden 
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: vaultwarden 
+  template:
+    metadata:
+      labels:
+        app: vaultwarden 
+    spec:
+      volumes:
+      - name: vaultwarden-pvc
+        persistentVolumeClaim:
+          claimName: vaultwarden-pvc
+      restartPolicy: Always
+      containers:
+      - image: vaultwarden/server:latest 
+        name: vaultwarden 
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80 
+          name: http 
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: vaultwarden-pvc
+          subPath: data 
