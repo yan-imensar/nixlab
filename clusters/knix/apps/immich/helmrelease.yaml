@@ -1,0 +1,51 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: immich
+  namespace: immich
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: immich
+      sourceRef:
+        kind: OCIRepository
+        name: immich-charts
+        namespace: immich
+      interval: 12h
+  install:
+    createNamespace: false
+  values:
+    # Immich version - required by the chart
+    controllers:
+      main:
+        containers:
+          main:
+            image:
+              tag: "v1.122.3"
+            env:
+              # PostgreSQL configuration - using external cloudnative-pg cluster
+              DB_HOSTNAME: immich-vectorchord-rw
+              DB_PORT: "5432"
+              DB_DATABASE_NAME: immich
+              DB_USERNAME:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres-user
+                    key: username
+              DB_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: immich-postgres-user
+                    key: password
+
+    # Use the existing PVC for library storage - required
+    immich:
+      persistence:
+        library:
+          existingClaim: immich-library
+
+    # Enable Valkey (Redis alternative)
+    valkey:
+      enabled: true
