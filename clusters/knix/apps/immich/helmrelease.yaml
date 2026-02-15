@@ -10,8 +10,8 @@ spec:
     spec:
       chart: immich
       sourceRef:
-        kind: OCIRepository
-        name: immich-charts
+        kind: HelmRepository
+        name: immich
         namespace: immich
       interval: 12h
   install:
