@@ -23,9 +23,8 @@ spec:
         containers:
           main:
             image:
-              tag: "v1.122.3"
+              tag: "v2.5.6"
             env:
-              # PostgreSQL configuration - using external cloudnative-pg cluster
               DB_HOSTNAME: immich-vectorchord-rw
               DB_PORT: "5432"
               DB_DATABASE_NAME: immich
@@ -39,13 +38,9 @@ spec:
                   secretKeyRef:
                     name: immich-postgres-user
                     key: password
-
-    # Use the existing PVC for library storage - required
     immich:
       persistence:
         library:
           existingClaim: immich-library
-
-    # Enable Valkey (Redis alternative)
     valkey:
       enabled: true
