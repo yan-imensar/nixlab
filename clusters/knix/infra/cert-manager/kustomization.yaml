@@ -5,6 +5,5 @@ resources:
   - repository.yaml
   - release.yaml
   - cloudflare-token-sealed.yaml
-  # ClusterIssuer et Certificates seront ajoutés après l'installation de cert-manager
-  # - clusterissuer.yaml
-  # - certificates.yaml
+  - clusterissuer.yaml
+  - certificates.yaml
